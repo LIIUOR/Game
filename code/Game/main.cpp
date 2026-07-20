@@ -12,10 +12,10 @@
 #include "House.h"
 #include "Chest.h"
 #include "GameProc.h"
+#include "Menu.h"
 int main(){
-    Hero hero{"hero",100,100,10,15.,30.,1};
-    Bandit bandit{"bandit",20,20,5,10.,10.,40,25,1};
-    GameProcess game1{bandit,hero};
-    game1.StartGame();
+    MainMenu menu;
+    menu.show();
+
     return 0;
 }
