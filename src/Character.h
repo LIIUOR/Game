@@ -19,6 +19,8 @@ public:
     int getDamage(){return damage_;}
     double getCritDamage(){return CritDamage_;}
     double getChanceCrit(){return ChanceCrit_;}
+    int getLevel(){return level_;}
+    int getMaxHP(){return maxHP_;}
     virtual void takeDamage(int amount){
         HP_-=amount;
         if(HP_<0)HP_=0;

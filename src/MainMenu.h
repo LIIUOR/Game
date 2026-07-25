@@ -10,7 +10,7 @@ class MainMenu{
 private:
     bool isRunning_=true;
     void Print(){
-        std::cout<<"\n1) Начать новую игру\n"<<"2) Загрузить игру\n"<<"3) Настройки\n"<<"4) Выход"<<std::endl;
+        std::cout<<"\n1) Начать новую игру\n"<<"2) Загрузить игру\n"<<"3) Настройки\n"<<"0) Выход"<<std::endl;
     }
     void StartNewGame(){
         Hero hero{"hero",100,100,10,15.,30.,1};
@@ -19,7 +19,12 @@ private:
         game1.StartGame();
     }
     void LoadGame(){
-        std::cout<<"Пока не готово"<<std::endl;
+        Hero hero{"hero",100,100,10,15.,30.,1};
+        int currentEnemyIndex=0;
+        if(GameProcess::LoadGame(hero,currentEnemyIndex)){
+            GameProcess game{hero,currentEnemyIndex};
+            game.StartGame();
+        }
     }
     void Settings(){
         std::cout<<"Пока не готово"<<std::endl;
@@ -30,7 +35,7 @@ public:
             int choice;
             Print();
             std::cin>>choice;
-            switch(choice){
+            switch(static_cast<Menu>(choice)){
                 case Menu::NewGame:
                     StartNewGame();
                     break;

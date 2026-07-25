@@ -12,10 +12,10 @@
 #include "House.h"
 #include "Chest.h"
 #include "GameProc.h"
-#include "Menu.h"
+#include "MainMenu.h"
 int main(){
     MainMenu menu;
-    menu.show();
+    menu.Show();
 
     return 0;
 }

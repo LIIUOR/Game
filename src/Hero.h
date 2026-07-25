@@ -18,6 +18,7 @@ private:
     int countGold_=0;
     int XP_=0;
     backpack inventory;
+    std::vector<std::string> defeatedEnemies_{};
 public:
     Hero(std::string name,int HP,int maxHP,int damage,double Crit,double ChanceCrit,int lvl):
         Character(name,HP,maxHP,damage,Crit,ChanceCrit,lvl){
@@ -49,6 +50,33 @@ public:
         }
         else{
             XP_+=amount;
+        }
+    }
+    void setStats(int HP,int maxHP,int damage,int level,int gold,int XP){
+        HP_=HP;
+        maxHP_=maxHP;
+        damage_=damage;
+        level_=level;
+        countGold_=gold;
+        XP_=XP;
+    }
+    void addDefeatedEnemy(const std::string& enemyName){
+        defeatedEnemies_.push_back(enemyName);
+    }
+    const std::vector<std::string>& getDefeatedEnemies()const{
+        return defeatedEnemies_;
+    }
+    void setDefeatedEnemies(const std::vector<std::string>& defeatedEnemies){
+        defeatedEnemies_=defeatedEnemies;
+    }
+    void printDefeatedEnemies()const{
+        if(defeatedEnemies_.empty()){
+            std::cout<<"История побежденных врагов пуста"<<std::endl;
+            return;
+        }
+        std::cout<<"История побежденных врагов:"<<std::endl;
+        for(size_t i=0;i<defeatedEnemies_.size();++i){
+            std::cout<<i+1<<") "<<defeatedEnemies_[i]<<std::endl;
         }
     }
 };
