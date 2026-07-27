@@ -20,6 +20,7 @@ private:
 
 public:
     GameProcess(Enemy& enemy, Hero& hero):mainHero_(hero),enemy_(enemy){srand(time (0));}
+    //ashags
     void SaveGame(){
         std::ofstream save(saveFile_);
         save<<mainHero_.getName()<<'\n'
