@@ -18,14 +18,14 @@ private:
         GameProcess game1{bandit,hero};
         game1.StartGame();
     }
-    void LoadGame(){
-        Hero hero{"hero",100,100,10,15.,30.,1};
-        int currentEnemyIndex=0;
-        if(GameProcess::LoadGame(hero,currentEnemyIndex)){
-            GameProcess game{hero,currentEnemyIndex};
-            game.StartGame();
-        }
-    }
+    // void LoadGame(){
+    //     Hero hero{"hero",100,100,10,15.,30.,1};
+    //     int currentEnemyIndex=0;
+    //     if(GameProcess::LoadGame(hero,currentEnemyIndex)){
+    //         GameProcess game{hero,currentEnemyIndex};
+    //         game.StartGame();
+    //     }
+    // }
     void Settings(){
         std::cout<<"Пока не готово"<<std::endl;
     }
@@ -40,7 +40,7 @@ public:
                     StartNewGame();
                     break;
                 case Menu::LoadGame:
-                    LoadGame();
+                    //LoadGame();
                     break;
                 case Menu::Settings:
                     Settings();

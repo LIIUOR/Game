@@ -20,7 +20,6 @@ private:
 
 public:
     GameProcess(Enemy& enemy, Hero& hero):mainHero_(hero),enemy_(enemy){srand(time (0));}
-    //ashags
     void SaveGame(){
         std::ofstream save(saveFile_);
         save<<mainHero_.getName()<<'\n'
@@ -34,30 +33,32 @@ public:
         }
         std::cout<<"Игра сохранена"<<std::endl;
     }
-    static bool LoadGame(Hero& hero,int& currentEnemyIndex){
-        std::ifstream save("savegame.txt");
-        if(!save){
-            std::cout<<"Сохранение не найдено"<<std::endl;
-            return false;
-        }
-        std::string name;
-        int HP,maxHP,damage,level,gold,XP;
-        size_t historySize;
-        save>>name;
-        save>>HP>>maxHP>>damage>>level>>gold>>XP>>currentEnemyIndex;
-        save>>historySize;
-        std::vector<std::string> defeatedEnemies;
-        for(size_t i=0;i<historySize;++i){
-            std::string enemyName;
-            save>>enemyName;
-            defeatedEnemies.push_back(enemyName);
-        }
-        hero=Hero{name,HP,maxHP,damage,15.,30.,level};
-        hero.setStats(HP,maxHP,damage,level,gold,XP);
-        hero.setDefeatedEnemies(defeatedEnemies);
-        std::cout<<"Игра загружена"<<std::endl;
-        return true;
-    }
+    // static bool LoadGame(Hero& hero,int& currentEnemyIndex){
+    //     std::ifstream save("savegame.txt");
+    //     if(!save){
+    //         std::cout<<"Сохранение не найдено"<<std::endl;
+    //         return false;
+    //     }
+    //     for(const auto& enemyName:defeatedEnemies){
+    //     std::string name;
+    //     for(const auto& enemyName:defeatedEnemies){
+    //     int HP,maxHP,damage,level,gold,XP;
+    //     size_t historySize;
+    //     save>>name;
+    //     save>>HP>>maxHP>>damage>>level>>gold>>XP>>currentEnemyIndex;
+    //     save>>historySize;Enemy& enemy_
+    //     std::vector<std::string> defeatedEnemies;
+    //     for(size_t i=0;i<historySize;++i){
+    //         std::string enemyName;
+    //         save>>enemyName;
+    //         defeatedEnemies.push_back(enemyName);
+    //     }
+    //     hero=Hero{name,HP,maxHP,damage,15.,30.,level};
+    //     hero.setStats(HP,maxHP,damage,level,gold,XP);
+    //     hero.setDefeatedEnemies(defeatedEnemies);
+    //     std::cout<<"Игра загружена"<<std::endl;
+    //     return true;
+    // }
     bool StartGame(){
         std::cout<<"Первый ваш враг на пути это бандит"<<std::endl;
         while(mainHero_.isAlive() && !wantsToQuit){
