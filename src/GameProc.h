@@ -33,6 +33,42 @@ public:
         }
         std::cout<<"Игра сохранена"<<std::endl;
     }
+    void SwitchFight(auto choice){
+        switch (choice)
+            {
+                case Action::Attack:
+                    mainHero_.attack(enemy_);
+                    enemy_.attack(mainHero_);
+                    break;
+                case Action::Heal:
+                {   
+                    mainHero_.RegenHP();
+                    int number=rand();
+                    if(number%2==0){
+                    enemy_.attack(mainHero_);}
+                    break;
+                }
+                case Action::Save:
+                    SaveGame();
+                    break;
+                case Action::Exit:
+                    wantsToQuit=true;
+                    break;
+                default:
+                    std::cout<<"Неверный ввод, попробуйте еще раз";
+                    break;
+            }
+    }
+    void WhileFight(){
+        while(mainHero_.isAlive() && !wantsToQuit){
+            std::cout<<"Что ты хочешь сделать\n1) Атаковать \n2) Восстановить здоровье\n3) Сохранить игру\n0) Выйти из игры";
+            Action choice;
+            int x;
+            std::cin>>x;
+            choice = static_cast<Action>(x);
+            SwitchFight(choice);
+        }
+    }
     // static bool LoadGame(Hero& hero,int& currentEnemyIndex){
     //     std::ifstream save("savegame.txt");
     //     if(!save){
@@ -61,37 +97,7 @@ public:
     // }
     bool StartGame(){
         std::cout<<"Первый ваш враг на пути это бандит"<<std::endl;
-        while(mainHero_.isAlive() && !wantsToQuit){
-            std::cout<<"Что ты хочешь сделать\n1) Атаковать \n2) Восстановить здоровье\n3) Сохранить игру\n0) Выйти из игры";
-            Action choice;
-            int x;
-            std::cin>>x;
-            choice = static_cast<Action>(x);
-            switch (choice)
-            {
-                case Action::Attack:
-                    mainHero_.attack(enemy_);
-                    enemy_.attack(mainHero_);
-                    break;
-                case Action::Heal:
-                {   
-                    mainHero_.RegenHP();
-                    int number=rand();
-                    if(number%2==0){
-                    enemy_.attack(mainHero_);}
-                    break;
-                }
-                case Action::Save:
-                    SaveGame();
-                    break;
-                case Action::Exit:
-                    wantsToQuit=true;
-                    break;
-                default:
-                    std::cout<<"Неверный ввод, попробуйте еще раз";
-                    break;
-            }
-        }
+        WhileFight();
         mainHero_.getGold(enemy_.getGold());
         mainHero_.getXP(enemy_.GainXp());
         while(mainHero_.isAlive() && !wantsToQuit){
@@ -106,72 +112,12 @@ public:
                     break;
                 case 4:
                     std::cout<<"Ваш новый враг это животное"<<std::endl;
-                    while(mainHero_.isAlive() && enemy_.isAlive() && !wantsToQuit){
-                        std::cout<<"Что ты хочешь сделать\n1) Атаковать \n2) Восстановить здоровье\n3) Сохранить игру\n0) Выйти из игры";
-                        Action choice;
-                        int x;
-                        std::cin>>x;
-                        choice = static_cast<Action>(x);
-                        switch (choice)
-                        {
-                            case Action::Attack:
-                                mainHero_.attack(enemy_);
-                                enemy_.attack(mainHero_);
-                                break;
-                            case Action::Heal:
-                            {   
-                                mainHero_.RegenHP();
-                                int number=rand();
-                                if(number%2==0){
-                                enemy_.attack(mainHero_);}
-                                break;
-                            }
-                            case Action::Save:
-                                SaveGame();
-                                break;
-                            case Action::Exit:
-                                wantsToQuit=true;
-                                break;
-                            default:
-                                std::cout<<"Неверный ввод, попробуйте еще раз";
-                                break;
-                        }
-                    }
+                    WhileFight();
                     mainHero_.getGold(enemy_.getGold());
                     mainHero_.getXP(enemy_.GainXp());
                 case 5:
                     std::cout<<"Ваш новый противник Босс";
-                    while(mainHero_.isAlive() && enemy_.isAlive() && !wantsToQuit){
-                        std::cout<<"Что ты хочешь сделать\n1) Атаковать \n2) Восстановить здоровье\n3) Сохранить игру\n0) Выйти из игры";
-                        Action choice;
-                        int x;
-                        std::cin>>x;
-                        choice = static_cast<Action>(x);
-                        switch (choice)
-                        {
-                            case Action::Attack:
-                                mainHero_.attack(enemy_);
-                                enemy_.attack(mainHero_);
-                                break;
-                            case Action::Heal:
-                            {   
-                                mainHero_.RegenHP();
-                                int number=rand();
-                                if(number%2==0){
-                                enemy_.attack(mainHero_);}
-                                break;
-                            }
-                            case Action::Save:
-                                SaveGame();
-                                break;
-                            case Action::Exit:
-                                wantsToQuit=true;
-                                break;
-                            default:
-                                std::cout<<"Неверный ввод, попробуйте еще раз";
-                                break;
-                        }
-                    }
+                    WhileFight();
                     mainHero_.getGold(enemy_.getGold());
                     mainHero_.getXP(enemy_.GainXp());
                 case 6:

@@ -18,6 +18,25 @@ private:
         GameProcess game1{bandit,hero};
         game1.StartGame();
     }
+    void ShowSwitch(int choice){
+    switch(static_cast<Menu>(choice)){
+                case Menu::NewGame:
+                    StartNewGame();
+                    break;
+                case Menu::LoadGame:
+                    //LoadGame();
+                    break;
+                case Menu::Settings:
+                    Settings();
+                    break;
+                case Menu::Exit:
+                    isRunning_=false;
+                    std::cout<<"Выход из игры"<<std::endl;
+                    break;
+                default:
+                    std::cout<<"Неверный ввод, попробуйте еще раз"<<std::endl;
+            }
+}
     // void LoadGame(){
     //     Hero hero{"hero",100,100,10,15.,30.,1};
     //     int currentEnemyIndex=0;
@@ -35,23 +54,7 @@ public:
             int choice;
             Print();
             std::cin>>choice;
-            switch(static_cast<Menu>(choice)){
-                case Menu::NewGame:
-                    StartNewGame();
-                    break;
-                case Menu::LoadGame:
-                    //LoadGame();
-                    break;
-                case Menu::Settings:
-                    Settings();
-                    break;
-                case Menu::Exit:
-                    isRunning_=false;
-                    std::cout<<"Выход из игры"<<std::endl;
-                    break;
-                default:
-                    std::cout<<"Неверный ввод, попробуйте еще раз"<<std::endl;
-            }
+            ShowSwitch(choice);
         }
     }
 };
