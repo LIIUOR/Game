@@ -18,29 +18,13 @@ private:
         GameProcess game1{bandit,hero};
         game1.StartGame();
     }
-    void LoadGame(){
-        Hero hero{"hero",100,100,10,15.,30.,1};
-        int currentEnemyIndex=0;
-        if(GameProcess::LoadGame(hero,currentEnemyIndex)){
-            GameProcess game{hero,currentEnemyIndex};
-            game.StartGame();
-        }
-    }
-    void Settings(){
-        std::cout<<"Пока не готово"<<std::endl;
-    }
-public:
-    void Show(){
-        while(isRunning_){
-            int choice;
-            Print();
-            std::cin>>choice;
-            switch(static_cast<Menu>(choice)){
+    void ShowSwitch(int choice){
+    switch(static_cast<Menu>(choice)){
                 case Menu::NewGame:
                     StartNewGame();
                     break;
                 case Menu::LoadGame:
-                    LoadGame();
+                    //LoadGame();
                     break;
                 case Menu::Settings:
                     Settings();
@@ -52,6 +36,25 @@ public:
                 default:
                     std::cout<<"Неверный ввод, попробуйте еще раз"<<std::endl;
             }
+}
+    // void LoadGame(){
+    //     Hero hero{"hero",100,100,10,15.,30.,1};
+    //     int currentEnemyIndex=0;
+    //     if(GameProcess::LoadGame(hero,currentEnemyIndex)){
+    //         GameProcess game{hero,currentEnemyIndex};
+    //         game.StartGame();
+    //     }
+    // }
+    void Settings(){
+        std::cout<<"Пока не готово"<<std::endl;
+    }
+public:
+    void Show(){
+        while(isRunning_){
+            int choice;
+            Print();
+            std::cin>>choice;
+            ShowSwitch(choice);
         }
     }
 };
